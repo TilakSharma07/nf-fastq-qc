@@ -1,0 +1,54 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  unit-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install test dependencies
+        run: pip install pytest matplotlib
+      - name: Run unit tests
+        run: pytest tests/ -q
+
+  pipeline-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install matplotlib
+        run: pip install matplotlib
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Install Nextflow
+        run: |
+          curl -s https://get.nextflow.io | bash
+          sudo mv nextflow /usr/local/bin/
+      - name: Run pipeline on test data
+        run: nextflow run . -profile test --outdir results_test
+      - name: Check the validation gate passed
+        run: grep -q "VALIDATION PASSED" results_test/summary/validation.txt
+      - name: Check the gate actually fires when it should
+        run: |
+          # Same data, looser trimming: the run MUST fail at VALIDATE_QC.
+          if nextflow run . -profile test --outdir results_loose --quality_cutoff 20; then
+            echo "ERROR: validation gate did not fire" && exit 1
+          fi
+          test ! -f results_loose/report/qc_report.md
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: qc-report
+          path: results_test/report/

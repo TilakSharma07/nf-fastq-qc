@@ -1,0 +1,6 @@
+name: nf-fastq-qc
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - matplotlib-base=3.8

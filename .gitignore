@@ -1,0 +1,6 @@
+work/
+results*/
+.nextflow*
+__pycache__/
+*.pyc
+.pytest_cache/

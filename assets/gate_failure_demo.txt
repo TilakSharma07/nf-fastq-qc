@@ -1,0 +1,5 @@
+  VALIDATION FAILED:
+    [sampleB] trimmed pct_q30 69.8669 below required floor 70.0
+
+
+(produced by: nextflow run . -profile test --quality_cutoff 20)

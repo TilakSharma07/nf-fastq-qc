@@ -1,5 +1,7 @@
 # nf-fastq-qc
 
+[![CI](https://github.com/TilakSharma07/nf-fastq-qc/actions/workflows/ci.yml/badge.svg)](https://github.com/TilakSharma07/nf-fastq-qc/actions/workflows/ci.yml)
+
 A small, reproducible Nextflow DSL2 pipeline for short-read FASTQ quality
 control and trimming — with a **hard validation gate** that stops the run if
 trimming did not actually improve the data.

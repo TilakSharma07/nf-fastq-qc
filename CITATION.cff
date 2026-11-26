@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "nf-fastq-qc: Nextflow DSL2 FASTQ quality control with a hard validation gate"
+type: software
+authors:
+  - given-names: Tilak
+    family-names: Sharma
+    email: tilaksharma273@gmail.com
+    affiliation: "Independent researcher, Baran, Rajasthan, India"
+    orcid: "https://orcid.org/0009-0002-8764-904X"
+repository-code: "https://github.com/TilakSharma07/nf-fastq-qc"
+url: "https://tilaksharma07.github.io"
+license: MIT
+keywords:
+  - "Nextflow"
+  - "DSL2"
+  - "quality control"
+  - "FASTQ"
+  - "validation gate"
+  - "reproducibility"
